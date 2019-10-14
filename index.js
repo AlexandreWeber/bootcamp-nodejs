@@ -1,26 +1,26 @@
 const express = require('express');
-
 const server = express();
 
 server.use(express.json());
 
-const users = ['Alexandre', 'Ariane', 'Maria', 'Mariela'];
+const users = ['Alexandre', 'Ariane', 'Dougas,', 'Maria', 'Mariela'];
 
-server.get('/users', (req, res) => {
+server.get('/users', ({res}) => {
     res.json(users);
 });
 
 server.get('/users/:index', (req, res) => {
     const { index } = req.params;
-
+    
     res.json(users[index]);
 });
 
 server.post('/users', (req, res) => {
     const { name } = req.body;
+   
     users.push(name);
 
-    return res.json(users);
+    res.json(users);
 });
 
 server.put('/users/:index', (req, res) => {
@@ -29,7 +29,7 @@ server.put('/users/:index', (req, res) => {
     
     users[index] = name;
 
-    return res.json(users);
+    res.json(users);
 });
 
 server.delete('/users/:index', (req, res) => {
@@ -37,7 +37,7 @@ server.delete('/users/:index', (req, res) => {
     
     users.splice(index, 1);
 
-    return res.json(users);
+    res.json(users);
 });
 
 server.listen(3000);
